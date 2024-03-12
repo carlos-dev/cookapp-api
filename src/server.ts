@@ -39,7 +39,7 @@ app.post("/", async (req: Request, res) => {
     );
     console.log(gptResponse.message);
 
-    return gptResponse.message;
+    req.body = gptResponse.message;
   } catch (error) {
     if (error instanceof Error) {
       console.error("Erro:", error.message);
