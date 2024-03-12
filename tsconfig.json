@@ -1,0 +1,25 @@
+{
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "compilerOptions": {
+    "target": "es6",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "lib": ["ES6"],
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+    },
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
