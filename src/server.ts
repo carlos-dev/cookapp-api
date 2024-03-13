@@ -33,13 +33,13 @@ app.post("/", async (req: Request, res) => {
     console.log(req.body);
     const formattedIngredients = formatIngredients(ingredients);
 
-    const gptResponse = await rsnchat.gpt(
-      `Com esses ingredientes ${formattedIngredients} qual receita posso fazer? Descreva o passo a passo receitas com esses ingredientes. Além disso, quero que sua resposta seja array de receitas, onde cada item será um objeto com os campos: name, descritpion, minutes, e steps. O campo name deve conter o nome da receita, o campo description deve conter a descrição da receita, o campo minutes deve conter o tempo de preparo da receita, e o campo steps deve conter um array com os passos da receita. Preciso que sua resposta seja apenas os array de receitas, pois vou mandar para o front end da minha aplicação, então não escreva nada antes ou após os arrays
-      `
+    const geminiResponse = await rsnchat.gemini(
+      `Dadas as seguintes condições, gostaria de receber uma ou mais receitas que possam ser preparadas apenas com os seguintes ingredientes: ${formattedIngredients}. Cada receita deve ser representada como um objeto contendo os seguintes campos: name, description, minutes, e steps. O campo name deve conter o nome da receita, description deve conter uma breve descrição da receita, minutes deve conter o tempo estimado de preparo da receita em minutos, e steps deve ser um array contendo os passos para preparar a receita. Por favor, forneça apenas o array de receitas, sem qualquer conteúdo adicional antes ou depois.`
     );
-    console.log(gptResponse.message);
 
-    res.json({ data: gptResponse.message });
+    console.log(geminiResponse.message);
+
+    res.json({ data: JSON.parse(geminiResponse.message) });
   } catch (error) {
     if (error instanceof Error) {
       console.error("Erro:", error.message);
