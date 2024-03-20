@@ -30,7 +30,7 @@ app.post("/", async (req: Request, res) => {
     if (!ingredients || !Array.isArray(ingredients)) {
       throw new Error("A lista de ingredientes não é válida.");
     }
-    console.log(req.body);
+
     const formattedIngredients = formatIngredients(ingredients);
 
     const geminiResponse = await rsnchat.gemini(
